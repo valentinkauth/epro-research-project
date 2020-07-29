@@ -1,0 +1,104 @@
+{
+    "resourceType": "Questionnaire",
+    "id": "12345",
+    "text": {
+      "status": "generated",
+      "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">\n      <pre>\n            1.Comorbidity?\n              1.1 Cardial Comorbidity\n                1.1.1 Angina?\n                1.1.2 MI?\n              1.2 Vascular Comorbidity?\n              ...\n            Histopathology\n              Abdominal\n                pT category?\n              ...\n          </pre>\n    </div>"
+    },
+    "url": "http://hl7.org/fhir/Questionnaire/3141",
+    "title": "ePRO Testfragebogen",
+    "status": "draft",
+    "subjectType": ["Patient"],
+    "date": "2020-07",
+    "item": [
+      {
+        "linkId": "test_general",
+        "text": "Gesamtbefinden",
+        "type": "group",
+        "item": [
+          {
+            "linkId": "test_general_q1",
+            "text": "Wie fühlst du dich heute allgemein?",
+            "type": "choice",
+            "required": true,
+            "answerOption": [
+              {
+                "valueCoding": {
+                  "code": "0",
+                  "display": "sehr gut"
+                }
+              },
+              {
+                "valueCoding": {
+                  "code": "1",
+                  "display": "gut"
+                }
+              },
+              {
+                "valueCoding": {
+                  "code": "2",
+                  "display": "mittel"
+                }
+              },
+              {
+                "valueCoding": {
+                  "code": "3",
+                  "display": "schlecht"
+                }
+              },
+              {
+                "valueCoding": {
+                  "code": "4",
+                  "display": "sehr schlecht"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "linkId": "test_eyes",
+        "text": "Augen",
+        "type": "group",
+        "item": [
+          {
+            "linkId": "test_eyes_q1",
+            "text": "Belastung",
+            "type": "choice",
+            "answerOption": [
+              {
+                "valueCoding": {
+                  "code": "0",
+                  "display": "Keine"
+                }
+              },
+              {
+                "valueCoding": {
+                  "code": "1",
+                  "display": "Geringe"
+                }
+              },
+              {
+                "valueCoding": {
+                  "code": "2",
+                  "display": "Mäßige"
+                }
+              },
+              {
+                "valueCoding": {
+                  "code": "3",
+                  "display": "Starke"
+                }
+              }
+            ]
+          },
+          {
+            "linkId": "test_eyes_q2",
+            "text": "Nasenjucken",
+            "type": "boolean"
+          }
+        ]
+      }
+    ]
+  }
+  
