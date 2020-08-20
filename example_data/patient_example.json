@@ -1,0 +1,44 @@
+{
+  "resourceType": "Patient",
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">\n            <p>Patient: Kauth, Valentin</p>\n        </div>"
+  },
+  "name": [
+    {
+      "use": "official",
+      "text": "Valentin Kauth",
+      "family": "Kauth",
+      "given": ["Valentin"],
+      "prefix": ["Mr"]
+    }
+  ],
+  "telecom": [
+    {
+      "system": "phone",
+      "value": "+4915122953327",
+      "use": "mobile"
+    }
+  ],
+  "gender": "male",
+  "birthDate": "1993-09-16",
+  "address": [
+    {
+      "use": "private",
+      "line": ["Gustav-Müller-Str. 13"],
+      "city": "Berlin",
+      "state": "Berlin",
+      "postalCode": "10829",
+      "country": "GER"
+    }
+  ],
+  "maritalStatus": {
+    "coding": [
+      {
+        "system": "http://hl7.org/fhir/v3/MaritalStatus",
+        "code": "S",
+        "display": "Single"
+      }
+    ]
+  }
+}

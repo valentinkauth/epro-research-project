@@ -1,0 +1,254 @@
+{
+  "resourceType": "Questionnaire",
+  "identifier": { "value": "eortc-qlq-c30" },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"> Das ist ein Testfragebogen bestehend aus Fragen des EORTC QLQ-C30 (Version 3.0) sowie einer optionalen Texteingabe für Notizen</div>"
+  },
+  "url": "http://hl7.org/fhir/Questionnaire/3141",
+  "title": "Testfragebogen für Krebspatienten",
+  "status": "draft",
+  "subjectType": ["Patient"],
+  "date": "2020-07",
+  "item": [
+    {
+      "linkId": "eortc-qlq-c30-general",
+      "text": "Allgemein",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "eortc-qlq-c30-q1",
+          "text": "Bereitet es Ihnen Schwierigkeiten, sich körperlich anzustrengen (z. B. eine schwere Einkaufstasche oder einen Koffer zu tragen)?",
+          "type": "choice",
+          "required": true,
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "1",
+                "display": "Überhaupt nicht"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "2",
+                "display": "Wenig"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "3",
+                "display": "Mäßig"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "4",
+                "display": "Sehr"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "eortc-qlq-c30-q2",
+          "text": "Bereitet es Ihnen Schwierigkeiten, einen längeren Spaziergang zu machen?",
+          "type": "choice",
+          "required": true,
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "1",
+                "display": "Überhaupt nicht"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "2",
+                "display": "Wenig"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "3",
+                "display": "Mäßig"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "4",
+                "display": "Sehr"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "eortc-qlq-c30-lastweek",
+      "text": "Während der letzten Woche",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "eortc-qlq-c30-q6",
+          "text": "Waren Sie bei Ihrer Arbeit oder bei anderen tagtäglichen Beschäftigungen eingeschränkt?",
+          "type": "choice",
+          "required": true,
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "1",
+                "display": "Überhaupt nicht"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "2",
+                "display": "Wenig"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "3",
+                "display": "Mäßig"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "4",
+                "display": "Sehr"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "eortc-qlq-c30-q7",
+          "text": "Waren Sie bei Ihren Hobbys oder anderen Freizeitbeschäftigungen eingeschränkt?",
+          "type": "choice",
+          "required": true,
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "1",
+                "display": "Überhaupt nicht"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "2",
+                "display": "Wenig"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "3",
+                "display": "Mäßig"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "4",
+                "display": "Sehr"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "eortc-qlq-c30-final",
+      "text": "Bitte kreisen Sie bei den folgenden Fragen die Zahl zwischen 1 und 7 ein, die am besten auf Sie zutrifft",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "eortc-qlq-c30-q29",
+          "text": "Wie würden Sie insgesamt Ihren Gesundheitszustand während der letzten Woche einschätzen?",
+          "type": "choice",
+          "required": true,
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "1",
+                "display": "sehr schlecht"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "2"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "3"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "4"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "5"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "6"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "7",
+                "display": "ausgezeichnet"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "eortc-qlq-c30-q30",
+          "text": "Wie würden Sie insgesamt Ihre Lebensqualität während der letzten Woche einschätzen?",
+          "type": "choice",
+          "required": true,
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "1",
+                "display": "sehr schlecht"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "2"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "3"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "4"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "5"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "6"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "7",
+                "display": "ausgezeichnet"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
