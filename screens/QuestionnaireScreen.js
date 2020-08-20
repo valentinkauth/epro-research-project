@@ -27,8 +27,6 @@ export default class QuestionnaireScreen extends React.Component {
   };
 
   componentDidMount() {
-    // console.log(this.props.navigation.state.params.questionnaire.item);
-
     var questions = [];
 
     for (var item of this.props.navigation.state.params.questionnaire.item) {
@@ -62,6 +60,7 @@ export default class QuestionnaireScreen extends React.Component {
             {this.state.questions.map((question, index) => (
               <QuestionCard
                 key={index}
+                type={question.type}
                 linkId={question.linkId}
                 title={question.text}
                 answerOption={question.answerOption}
@@ -92,10 +91,10 @@ export default class QuestionnaireScreen extends React.Component {
     // Update state
     this.setState({ answers: updatedAnswers });
 
-    // Check if all questions are answered
+    // Check if all questions are answered (exclude questions that are not required)
     var everythingAnswered = true;
     for (var question of this.state.questions) {
-      if (!updatedAnswers[question.linkId]) {
+      if (question.required && !updatedAnswers[question.linkId]) {
         everythingAnswered = false;
         break;
       }
@@ -103,7 +102,7 @@ export default class QuestionnaireScreen extends React.Component {
     this.setState({ allQuestionsAnswered: everythingAnswered });
   };
 
-  sendAnswers = () => {
+  sendAnswers = async () => {
     // Get formatted questionnaire response object
     let questionnaireResponseFHIR = FHIRHelper.formatQuestionnaireResponse(
       this.state.answers,
@@ -111,7 +110,14 @@ export default class QuestionnaireScreen extends React.Component {
       this.state.patient
     );
 
-    console.log("Creating questionnaire response object");
+    var result = await APIHelper.postQuestionnaireResponse(
+      JSON.stringify(questionnaireResponseFHIR)
+    );
+
+    // console.log(JSON.stringify(questionnaireResponseFHIR));
+
+    // console.log(questionnaireResponseFHIR);
+
     // console.log(questionnaireResponseFHIR);
 
     // this.props.navigation.goBack();
@@ -132,7 +138,9 @@ const Container = styled.KeyboardAvoidingView`
 `;
 
 const CloseButtonContainer = styled.View`
+  z-index: 999;
   height: 40px;
+  background-color: white;
 `;
 
 const CloseButton = styled.TouchableOpacity`
@@ -151,6 +159,10 @@ const QuestionContainer = styled.ScrollView`
 
 const TitleContainer = styled.View`
   margin-bottom: 0px;
+  z-index: 999
+  background-color: white;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 `;
 
 const Title = styled.Text`

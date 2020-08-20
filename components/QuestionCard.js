@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { KeyboardAvoidingView, Switch, TextInput } from "react-native";
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
@@ -8,36 +9,94 @@ import RadioForm, {
 
 // TODO: Based on question type, render specific content and pass question and callback to child component
 const QuestionCard = (props) => {
-  var radio_props = [];
+  // Set state for boolean toogle
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
-  props.answerOption.forEach((option) => {
-    var label = option.valueCoding.display
-      ? option.valueCoding.code + " - " + option.valueCoding.display
-      : option.valueCoding.code;
-    var value = option.valueCoding.code;
-    radio_props.push({ label: label, value: value });
-  });
+  // Set state for text input
+  const [value, onChangeText] = React.useState("");
+
+  // Create empty question card content variable
+  var questionCardContent = "";
+
+  console.log(props.type);
+
+  // Fill content based on question type
+  switch (props.type) {
+    case "choice":
+      // Create properties for radio form
+      var radio_props = [];
+      props.answerOption.forEach((option) => {
+        var label = option.valueCoding.display
+          ? option.valueCoding.code + " - " + option.valueCoding.display
+          : option.valueCoding.code;
+        var value = option.valueCoding.code;
+        radio_props.push({ label: label, value: value });
+      });
+      questionCardContent = (
+        <RadioForm
+          radio_props={radio_props}
+          initial={-1}
+          // formHorizontal={true}
+          // labelHorizontal={false}
+          onPress={(value) => {
+            props.callBack(props.linkId, getValueCoding(props, value));
+          }}
+        />
+      );
+      break;
+    case "boolean":
+      questionCardContent = (
+        <Switch
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={(value) => {
+            console.log(value);
+            toggleSwitch();
+            props.callBack(props.linkId, getValueBoolean(value));
+          }}
+          value={isEnabled}
+        />
+      );
+      break;
+    case "string":
+      questionCardContent = (
+        <TextInput
+          style={{
+            height: 80,
+            borderColor: "gray",
+            borderWidth: 1,
+            width: "90%",
+          }}
+          onChangeText={(text) => {
+            onChangeText(text);
+            props.callBack(props.linkId, getValueString(text));
+          }}
+          value={value}
+        />
+      );
+      break;
+    default:
+      questionCardContent = (
+        <QuestionText>
+          Für den Fragetyp {props.type} gibt es derzeit noch kein Eingabefeld
+        </QuestionText>
+      );
+      break;
+  }
 
   return (
     <Container>
       <QuestionText>{props.title}</QuestionText>
-      <RadioForm
-        radio_props={radio_props}
-        initial={-1}
-        // formHorizontal={true}
-        // labelHorizontal={false}
-        onPress={(value) => {
-          props.callBack(props.linkId, getCode(props, value));
-        }}
-      />
+      {questionCardContent}
     </Container>
   );
 };
 
 export default QuestionCard;
 
-// Get response object
-getCode = (props, value) => {
+// Get response object of type valueCoding
+getValueCoding = (props, value) => {
   var valueObject = {};
   props.answerOption.forEach((option) => {
     if (option.valueCoding.code == value) {
@@ -47,7 +106,17 @@ getCode = (props, value) => {
   return valueObject;
 };
 
-const Container = styled.View`
+// Get response object of type valueBoolean
+getValueBoolean = (booleanValue) => {
+  return { valueBoolean: { value: booleanValue } };
+};
+
+// Get response object of type valueString
+getValueString = (stringValue) => {
+  return { valueString: { value: stringValue } };
+};
+
+const Container = styled.KeyboardAvoidingView`
   background-color: white;
   padding-top: 30px;
   padding-bottom: 30px;

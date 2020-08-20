@@ -120,45 +120,6 @@
           ]
         },
         {
-          "linkId": "eortc-qlq-c30-q7",
-          "text": "Waren Sie bei Ihren Hobbys oder anderen Freizeitbeschäftigungen eingeschränkt?",
-          "type": "choice",
-          "required": true,
-          "answerOption": [
-            {
-              "valueCoding": {
-                "code": "1",
-                "display": "Überhaupt nicht"
-              }
-            },
-            {
-              "valueCoding": {
-                "code": "2",
-                "display": "Wenig"
-              }
-            },
-            {
-              "valueCoding": {
-                "code": "3",
-                "display": "Mäßig"
-              }
-            },
-            {
-              "valueCoding": {
-                "code": "4",
-                "display": "Sehr"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "linkId": "eortc-qlq-c30-final",
-      "text": "Bitte kreisen Sie bei den folgenden Fragen die Zahl zwischen 1 und 7 ein, die am besten auf Sie zutrifft",
-      "type": "group",
-      "item": [
-        {
           "linkId": "eortc-qlq-c30-q29",
           "text": "Wie würden Sie insgesamt Ihren Gesundheitszustand während der letzten Woche einschätzen?",
           "type": "choice",
@@ -247,6 +208,32 @@
               }
             }
           ]
+        }
+      ]
+    },
+    {
+      "linkId": "example-toggles",
+      "text": "Bitte markieren Sie das Kästchen, wenn das Auftreten eines Symptoms auf Sie zutrifft.",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "example-toggles-q1",
+          "text": "Hatten Sie in den letzten Tagen Kopfschmerzen?",
+          "type": "boolean",
+          "required": false
+        }
+      ]
+    },
+    {
+      "linkId": "example-notes",
+      "text": "Bitte markieren Sie das Kästchen, wenn das Auftreten eines Symptoms auf Sie zutrifft.",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "example-notes-q1",
+          "text": "Weitere Anmerkungen",
+          "type": "string",
+          "required": false
         }
       ]
     }

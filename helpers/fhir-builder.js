@@ -16,15 +16,16 @@ export const formatQuestionnaireResponse = (
   // Create base instance of Resource
   var questionnaireResponseFHIR = {
     resourceType: "QuestionnaireResponse",
+    // questionnaire: "ReferenceQuestionnaire",
+    // source: "ReferencePatient",
     status: "completed",
-    name: "text",
     authored: "2020-08-19T14:48:14.463Z",
     item: [],
   };
 
   // TODO: Iterate through items of questionnaire
   for (var item of questionnaire.item) {
-    newItem = { linkId: item.linkId, type: item.type };
+    newItem = { linkId: item.linkId };
     if (item.type == "group") {
       newItem.item = [];
       // Iterate through child items
@@ -32,11 +33,16 @@ export const formatQuestionnaireResponse = (
         if (childItem.type != "group") {
           newChildItem = {
             linkId: childItem.linkId,
-            type: childItem.type,
             text: childItem.text,
             answer: [responses[childItem.linkId]],
           };
-          newItem.item.push(newChildItem);
+          console.log(responses[childItem.linkId]);
+          if (
+            responses[childItem.linkId] &&
+            responses[childItem.linkId] != ""
+          ) {
+            newItem.item.push(newChildItem);
+          }
         }
       }
       questionnaireResponseFHIR.item.push(newItem);
@@ -44,9 +50,6 @@ export const formatQuestionnaireResponse = (
       questionnaireResponseFHIR.item.push(newItem);
     }
   }
-
-  console.log("Created new QuestionnaireResponse");
-  console.log(questionnaireResponseFHIR);
 
   // TODO: Iterate through questionnaire to get same structure in questionnaire response object
   // for (var item of questionnaire.item) {
