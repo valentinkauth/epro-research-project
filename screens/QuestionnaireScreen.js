@@ -106,12 +106,11 @@ export default class QuestionnaireScreen extends React.Component {
     // Get formatted questionnaire response object
     let questionnaireResponseFHIR = FHIRHelper.formatQuestionnaireResponse(
       this.state.answers,
-      this.state.questionnaire,
-      this.state.patient
+      this.state.questionnaire
     );
 
     var result = await APIHelper.postQuestionnaireResponse(
-      JSON.stringify(questionnaireResponseFHIR)
+      questionnaireResponseFHIR
     );
 
     // console.log(JSON.stringify(questionnaireResponseFHIR));

@@ -38,8 +38,8 @@ class ProfileScreen extends React.Component {
   }
 
   async componentDidMount() {
-    let questionnaireResponses = await APIHelper.getQuestionnaireResponses();
-    this.setState({ questionnaireReponses: questionnaireResponses });
+    // let questionnaireResponses = await APIHelper.getQuestionnaireResponses();
+    // this.setState({ questionnaireReponses: questionnaireResponses });
   }
 
   render() {

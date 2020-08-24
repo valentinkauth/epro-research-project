@@ -1,9 +1,10 @@
 {
   "resourceType": "Patient",
-  "text": {
-    "status": "generated",
-    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">\n            <p>Patient: Kauth, Valentin</p>\n        </div>"
-  },
+  "identifier": [
+    {
+      "value": "patient-example-1"
+    }
+  ],
   "name": [
     {
       "use": "official",
@@ -24,7 +25,7 @@
   "birthDate": "1993-09-16",
   "address": [
     {
-      "use": "private",
+      "use": "work",
       "line": ["Gustav-Müller-Str. 13"],
       "city": "Berlin",
       "state": "Berlin",

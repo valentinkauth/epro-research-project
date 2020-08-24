@@ -1,3 +1,5 @@
+import * as constants from "./constants";
+
 // TODO: Takes questionnaire in FHIR format and transforms it into questionnaire object that can be used by the Questionnaire Component
 export const formatQuestionnaire = (questionnaireFhir) => {
   var questionnaireObject = {};
@@ -6,32 +8,32 @@ export const formatQuestionnaire = (questionnaireFhir) => {
 };
 
 // TODO: Takes questionnaire Response Object from Questionnaire Component and transforms it into an object in FHIR format
-export const formatQuestionnaireResponse = (
-  responses,
-  questionnaire,
-  patient
-) => {
+export const formatQuestionnaireResponse = (responses, questionnaire) => {
   console.log(responses);
 
   // Create base instance of Resource
   var questionnaireResponseFHIR = {
     resourceType: "QuestionnaireResponse",
-    // questionnaire: "ReferenceQuestionnaire",
-    // source: "ReferencePatient",
+    questionnaire: questionnaire.url,
+    source: {
+      type: "Patient",
+      reference: constants.RESOURCES_PATIENT_IDENTIFIER,
+    },
     status: "completed",
-    authored: "2020-08-19T14:48:14.463Z",
+    authored: new Date().toISOString(),
     item: [],
   };
 
   // TODO: Iterate through items of questionnaire
   for (var item of questionnaire.item) {
-    newItem = { linkId: item.linkId };
+    console.log(item.linkId);
+    var newItem = { linkId: item.linkId };
     if (item.type == "group") {
       newItem.item = [];
       // Iterate through child items
       for (var childItem of item.item) {
         if (childItem.type != "group") {
-          newChildItem = {
+          var newChildItem = {
             linkId: childItem.linkId,
             text: childItem.text,
             answer: [responses[childItem.linkId]],

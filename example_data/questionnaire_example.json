@@ -1,104 +1,241 @@
 {
-    "resourceType": "Questionnaire",
-    "id": "12345",
-    "text": {
-      "status": "generated",
-      "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">\n      <pre>\n            1.Comorbidity?\n              1.1 Cardial Comorbidity\n                1.1.1 Angina?\n                1.1.2 MI?\n              1.2 Vascular Comorbidity?\n              ...\n            Histopathology\n              Abdominal\n                pT category?\n              ...\n          </pre>\n    </div>"
+  "resourceType": "Questionnaire",
+  "identifier": [
+    {
+      "value": "questionnaire-example-1"
+    }
+  ],
+  "url": "http://hl7.org/fhir/Questionnaire/questionnaire-example-1",
+  "title": "Testfragebogen für Krebspatienten",
+  "status": "draft",
+  "subjectType": ["Patient"],
+  "date": "2020-07",
+  "item": [
+    {
+      "linkId": "eortc-qlq-c30-general",
+      "text": "Allgemein",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "eortc-qlq-c30-q1",
+          "text": "Bereitet es Ihnen Schwierigkeiten, sich körperlich anzustrengen (z. B. eine schwere Einkaufstasche oder einen Koffer zu tragen)?",
+          "type": "choice",
+          "required": true,
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "1",
+                "display": "Überhaupt nicht"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "2",
+                "display": "Wenig"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "3",
+                "display": "Mäßig"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "4",
+                "display": "Sehr"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "eortc-qlq-c30-q2",
+          "text": "Bereitet es Ihnen Schwierigkeiten, einen längeren Spaziergang zu machen?",
+          "type": "choice",
+          "required": true,
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "1",
+                "display": "Überhaupt nicht"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "2",
+                "display": "Wenig"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "3",
+                "display": "Mäßig"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "4",
+                "display": "Sehr"
+              }
+            }
+          ]
+        }
+      ]
     },
-    "url": "http://hl7.org/fhir/Questionnaire/3141",
-    "title": "ePRO Testfragebogen",
-    "status": "draft",
-    "subjectType": ["Patient"],
-    "date": "2020-07",
-    "item": [
-      {
-        "linkId": "test_general",
-        "text": "Gesamtbefinden",
-        "type": "group",
-        "item": [
-          {
-            "linkId": "test_general_q1",
-            "text": "Wie fühlst du dich heute allgemein?",
-            "type": "choice",
-            "required": true,
-            "answerOption": [
-              {
-                "valueCoding": {
-                  "code": "0",
-                  "display": "sehr gut"
-                }
-              },
-              {
-                "valueCoding": {
-                  "code": "1",
-                  "display": "gut"
-                }
-              },
-              {
-                "valueCoding": {
-                  "code": "2",
-                  "display": "mittel"
-                }
-              },
-              {
-                "valueCoding": {
-                  "code": "3",
-                  "display": "schlecht"
-                }
-              },
-              {
-                "valueCoding": {
-                  "code": "4",
-                  "display": "sehr schlecht"
-                }
+    {
+      "linkId": "eortc-qlq-c30-lastweek",
+      "text": "Während der letzten Woche",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "eortc-qlq-c30-q6",
+          "text": "Waren Sie bei Ihrer Arbeit oder bei anderen tagtäglichen Beschäftigungen eingeschränkt?",
+          "type": "choice",
+          "required": true,
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "1",
+                "display": "Überhaupt nicht"
               }
-            ]
-          }
-        ]
-      },
-      {
-        "linkId": "test_eyes",
-        "text": "Augen",
-        "type": "group",
-        "item": [
-          {
-            "linkId": "test_eyes_q1",
-            "text": "Belastung",
-            "type": "choice",
-            "answerOption": [
-              {
-                "valueCoding": {
-                  "code": "0",
-                  "display": "Keine"
-                }
-              },
-              {
-                "valueCoding": {
-                  "code": "1",
-                  "display": "Geringe"
-                }
-              },
-              {
-                "valueCoding": {
-                  "code": "2",
-                  "display": "Mäßige"
-                }
-              },
-              {
-                "valueCoding": {
-                  "code": "3",
-                  "display": "Starke"
-                }
+            },
+            {
+              "valueCoding": {
+                "code": "2",
+                "display": "Wenig"
               }
-            ]
-          },
-          {
-            "linkId": "test_eyes_q2",
-            "text": "Nasenjucken",
-            "type": "boolean"
-          }
-        ]
-      }
-    ]
-  }
-  
+            },
+            {
+              "valueCoding": {
+                "code": "3",
+                "display": "Mäßig"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "4",
+                "display": "Sehr"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "eortc-qlq-c30-q29",
+          "text": "Wie würden Sie insgesamt Ihren Gesundheitszustand während der letzten Woche einschätzen?",
+          "type": "choice",
+          "required": true,
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "1",
+                "display": "sehr schlecht"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "2"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "3"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "4"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "5"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "6"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "7",
+                "display": "ausgezeichnet"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "eortc-qlq-c30-q30",
+          "text": "Wie würden Sie insgesamt Ihre Lebensqualität während der letzten Woche einschätzen?",
+          "type": "choice",
+          "required": true,
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "1",
+                "display": "sehr schlecht"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "2"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "3"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "4"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "5"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "6"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "7",
+                "display": "ausgezeichnet"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "example-toggles",
+      "text": "Bitte markieren Sie das Kästchen, wenn das Auftreten eines Symptoms auf Sie zutrifft.",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "example-toggles-q1",
+          "text": "Hatten Sie in den letzten Tagen Kopfschmerzen?",
+          "type": "boolean",
+          "required": false
+        }
+      ]
+    },
+    {
+      "linkId": "example-notes",
+      "text": "Bitte markieren Sie das Kästchen, wenn das Auftreten eines Symptoms auf Sie zutrifft.",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "example-notes-q1",
+          "text": "Weitere Anmerkungen",
+          "type": "string",
+          "required": false
+        }
+      ]
+    }
+  ]
+}

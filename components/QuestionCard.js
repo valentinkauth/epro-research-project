@@ -19,8 +19,6 @@ const QuestionCard = (props) => {
   // Create empty question card content variable
   var questionCardContent = "";
 
-  console.log(props.type);
-
   // Fill content based on question type
   switch (props.type) {
     case "choice":
@@ -108,12 +106,12 @@ getValueCoding = (props, value) => {
 
 // Get response object of type valueBoolean
 getValueBoolean = (booleanValue) => {
-  return { valueBoolean: { value: booleanValue } };
+  return { valueBoolean: booleanValue };
 };
 
 // Get response object of type valueString
 getValueString = (stringValue) => {
-  return { valueString: { value: stringValue } };
+  return { valueString: stringValue };
 };
 
 const Container = styled.KeyboardAvoidingView`

@@ -35,7 +35,6 @@ class QuestionnaireOverviewScreen extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
         <Container>
