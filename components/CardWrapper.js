@@ -15,8 +15,10 @@ const CardContainer = styled.View`
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-  shadow-opacity: 0.5;
+  border-color: #1063a9;
+  border-width: 1px;
+  /* shadow-opacity: 0.5;
   shadow-radius: 5px;
   shadow-color: grey;
-  shadow-offset: 0px 0px;
+  shadow-offset: 0px 0px; */
 `;

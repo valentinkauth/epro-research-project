@@ -99,10 +99,10 @@ export const getPatient = async () => {
   }
 };
 
-// TODO: Get all questionnaire responses for specific questionnaire id and patient id
+// Get all questionnaire responses for manually set questionnaire url and patient id
 export const getQuestionnaireResponses = async (questionnaire, patient) => {
   try {
-    // Make a request for all responses with given patient id and questionnaire url
+    // Make a request for all questionnaire responses with set patient id and questionnaire url
     const response = await axios.get(
       constants.SERVER_BASE_URL +
         "/QuestionnaireResponse?source=" +
@@ -112,9 +112,20 @@ export const getQuestionnaireResponses = async (questionnaire, patient) => {
       axiosConfig
     );
     let data = await response.data;
-    console.log(data.total);
+
+    // Check if matching resources were found in search query
+    if (data.entry && data.total && data.total > 0) {
+      console.log("QuestionnaireResponses loaded from server");
+
+      // Only use resource part of returned date (url not needed)
+      var reducedData = data.entry.map((value) => value.resource);
+      return reducedData;
+    } else {
+      console.log("No QuestionnaireResponses found");
+      return [];
+    }
   } catch (err) {
-    return {};
+    return [];
   }
 };
 
@@ -122,17 +133,15 @@ export const getQuestionnaireResponses = async (questionnaire, patient) => {
 export const postQuestionnaireResponse = async (questionnaireResponse) => {
   const data = JSON.stringify(questionnaireResponse);
 
-  console.log(data);
+  try {
+    const res = await axios.post(
+      baseUrl + "/QuestionnaireResponse",
+      data,
+      axiosConfig
+    );
 
-  const res = await axios.post(
-    baseUrl + "/QuestionnaireResponse",
-    data,
-    axiosConfig
-  );
-  console.log(res.data);
-};
-
-// TODO: Check if questionnaire with given id was already answered the current day by the given patient id, returns Boolean
-export const dailyQuestionnaireDone = (patientId, questionnaireId) => {
-  return true;
+    return true;
+  } catch (err) {
+    return false;
+  }
 };

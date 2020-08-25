@@ -18,7 +18,7 @@ class QuestionnaireOverviewScreen extends React.Component {
       patientFHIR: {},
       dailyQuestionDone: false,
       text:
-        "Du hast heute noch keinen Fragebogen ausgefüllt. Bitte klicke auf den Button um einen neuen Fraegbogen auszufüllen",
+        "Herzlich Willkommen! Klicke auf den Button um einen neuen Fragebogen auszufüllen.",
       buttonText: "Zum Fragebogen",
       questionnaire: false,
     };
@@ -91,7 +91,7 @@ const Title = styled.Text`
 const Text = styled.Text``;
 
 const ContentContainer = styled.ScrollView`
-  overflow: visible;
+
 `;
 
 const Subtitle = styled.Text`

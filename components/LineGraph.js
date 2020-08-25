@@ -1,23 +1,13 @@
 import React from "react";
-import styled from "styled-components";
 import { LineChart } from "react-native-chart-kit";
-import { Dimensions } from "react-native";
 
 // TODO: Based on question type, render specific content and pass question and callback to child component
 const LineGraph = (props) => {
   return (
     <LineChart
-    
-      data={{
-        labels: props.labels,
-        datasets: [
-          {
-            data: props.data,
-          },
-        ],
-      }}
-      width={props.width} // from react-native
-      height={250}
+      data={props.data}
+      width={1000} // from react-native
+      height={330}
       fromZero={false}
       yAxisInterval={1} // optional, defaults to 1
       chartConfig={{
@@ -42,7 +32,18 @@ const LineGraph = (props) => {
         borderRadius: 7,
       }}
       verticalLabelRotation={20}
-      formatYLabel={(label) => ""}
+      formatYLabel={(label) => {
+        switch (label) {
+          case "1":
+            return "Ü. nicht";
+          case "2":
+            return "Wenig";
+          case "3":
+            return "Mäßig";
+          case "4":
+            return "Sehr";
+        }
+      }}
     />
   );
 };

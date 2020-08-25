@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components/native";
-import { SafeAreaView, ScrollView, Dimensions } from "react-native";
+import { SafeAreaView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import CardWrapper from "../components/CardWrapper";
 import LineGraph from "../components/LineGraph";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as APIHelper from "../helpers/fhir-api";
+import * as FHIRHelper from "../helpers/fhir-builder";
 
 // Get screen width, e.g. to render Cards with corrent width
 // const screenWidth = Math.round(Dimensions.get("window").width);
@@ -19,9 +21,10 @@ class ProfileScreen extends React.Component {
       text:
         "Du hast heute noch keinen Fragebogen ausgefüllt. Bitte klicke auf den Button um einen neuen Fraegbogen auszufüllen",
       buttonText: "Zum Fragebogen",
+      visualizationData: null,
       questionnaireReponses: {
         "this-is-the-id": {
-          name: "Das ist der Name der Frage",
+          name: "Allgemeine Fragen",
           data: [1, 3, 1, 2, 1, 2, 1],
           labels: [
             "Montag",
@@ -38,18 +41,31 @@ class ProfileScreen extends React.Component {
   }
 
   async componentDidMount() {
-    // let questionnaireResponses = await APIHelper.getQuestionnaireResponses();
-    // this.setState({ questionnaireReponses: questionnaireResponses });
+    this.fetchData();
   }
 
+  fetchData = async () => {
+    // Get responses in FHIR format from server
+    let questionnaireResponses = await APIHelper.getQuestionnaireResponses();
+    // Translate FHIR format into UI-readable format
+    let mergedData = FHIRHelper.getVisualizationData(questionnaireResponses);
+
+    console.log(mergedData);
+
+    // TODO: Translate data into UI-readable format
+    this.setState({ visualizationData: mergedData });
+  };
+
   render() {
-    console.log(this.props);
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
         <Container>
           <StatusBar style="auto" />
           <TitleContainer>
             <Title>Profil</Title>
+            <TouchableIcon onPress={this.fetchData}>
+              <MaterialCommunityIcons name="reload" size={40} color="#1063a9" />
+            </TouchableIcon>
           </TitleContainer>
           <ContentContainer>
             <CardWrapper>
@@ -58,25 +74,39 @@ class ProfileScreen extends React.Component {
                 grafisch aufbereitet
               </Text>
             </CardWrapper>
-            {this.state.questionnaireReponses ? (
-              Object.keys(this.state.questionnaireReponses).map(
-                (key, index) => {
-                  return (
-                    <GraphContainer key={index}>
-                      <GraphTitle>
-                        {this.state.questionnaireReponses[key].name}
-                      </GraphTitle>
-                      <LineGraph
-                        labels={this.state.questionnaireReponses[key].labels}
-                        data={this.state.questionnaireReponses[key].data}
-                        width={Dimensions.get("window").width}
-                      />
-                    </GraphContainer>
-                  );
-                }
-              )
+            {this.state.visualizationData != null ? (
+              <GraphContainer>
+                {/* <GraphTitle>
+                  Hallo
+                </GraphTitle> */}
+                <InnerGraphContainer
+                  horizontal={true}
+                  showsHorizontalScrollIndicator={false}
+                >
+                  <LineGraph
+                    data={{
+                      datasets: this.state.visualizationData.datasets,
+                      labels: this.state.visualizationData.labels,
+                    }}
+                  />
+                </InnerGraphContainer>
+                <LabelContainer>
+                  {this.state.visualizationData.legend.map((value, index) => {
+                    return (
+                      <InnerLabelContainer>
+                        <Label
+                          labelColor={
+                            this.state.visualizationData.datasets[index].color
+                          }
+                        ></Label>
+                        <LabelText>{value}</LabelText>
+                      </InnerLabelContainer>
+                    );
+                  })}
+                </LabelContainer>
+              </GraphContainer>
             ) : (
-              <Text>Keine Daten gefunden</Text>
+              <TextError>Keine Daten gefunden</TextError>
             )}
           </ContentContainer>
         </Container>
@@ -91,12 +121,13 @@ const Container = styled.View`
   background-color: white;
   flex: auto;
   padding-top: 10px;
-  padding-bottom: 30px;
   padding-left: 15px;
   padding-right: 15px;
 `;
 
 const TitleContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
   margin-bottom: 20px;
   z-index: 1;
   background-color: white;
@@ -107,9 +138,9 @@ const Title = styled.Text`
   color: #1063a9;
 `;
 
-const ContentContainer = styled.ScrollView`
-  overflow: visible;
-`;
+const TouchableIcon = styled.TouchableOpacity``
+
+const ContentContainer = styled.ScrollView``;
 
 const Subtitle = styled.Text`
   font-size: 20px;
@@ -128,4 +159,40 @@ const GraphTitle = styled.Text`
 
 const GraphContainer = styled.View`
   margin-top: 30px;
+`;
+
+const InnerGraphContainer = styled.ScrollView`
+  overflow: visible;
+`;
+
+const LabelContainer = styled.View`
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  margin-bottom: 5px;
+`;
+
+const InnerLabelContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
+const Label = styled.View`
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  margin-right: 10px;
+  background-color: ${(props) => props.labelColor};
+`;
+
+const LabelText = styled.Text`
+  padding-right: 30px;
+`;
+
+const TextError = styled.Text`
+  text-align: center;
+  font-size: 17px;
+  margin-top: 10px;
+  color: red;
 `;

@@ -21,25 +21,17 @@ export default class QuestionnaireScreen extends React.Component {
   state = {
     patient: this.props.navigation.state.params.patient,
     questionnaire: this.props.navigation.state.params.questionnaire,
+    buttonText: "Fragebogen absenden",
     allQuestionsAnswered: false,
     answers: {},
     questions: [],
   };
 
   componentDidMount() {
-    var questions = [];
-
-    for (var item of this.props.navigation.state.params.questionnaire.item) {
-      if (item.type == "group") {
-        for (var childItem of item.item) {
-          if (childItem.type != "group") {
-            questions.push(childItem);
-          }
-        }
-      } else {
-        questions.push(item);
-      }
-    }
+    // Translate questions into format that can be rendered by the screen
+    var questions = FHIRHelper.formatQuestionnaire(
+      this.props.navigation.state.params.questionnaire
+    );
 
     this.setState({ questions: questions });
   }
@@ -70,7 +62,7 @@ export default class QuestionnaireScreen extends React.Component {
           </QuestionContainer>
           <ButtonContainer>
             <ButtonBottom
-              text={"Fragebogen absenden"}
+              text={this.state.buttonText}
               handleClick={this.sendAnswers}
               disabled={!this.state.allQuestionsAnswered}
             />
@@ -103,6 +95,8 @@ export default class QuestionnaireScreen extends React.Component {
   };
 
   sendAnswers = async () => {
+    this.setState({ buttonText: "Senden..." });
+
     // Get formatted questionnaire response object
     let questionnaireResponseFHIR = FHIRHelper.formatQuestionnaireResponse(
       this.state.answers,
@@ -113,17 +107,11 @@ export default class QuestionnaireScreen extends React.Component {
       questionnaireResponseFHIR
     );
 
-    // console.log(JSON.stringify(questionnaireResponseFHIR));
-
-    // console.log(questionnaireResponseFHIR);
-
-    // console.log(questionnaireResponseFHIR);
-
-    // this.props.navigation.goBack();
-
-    // TODO: Send questionnaire response object to server
-    // TODO: Change button text to "Wait.."
-    // TODO: Navigate back to main menu when answers were succesfully send
+    if (result == true) {
+      this.props.navigation.goBack();
+    } else {
+      this.setState({ buttonText: "Fehler beim Senden" });
+    }
   };
 }
 
@@ -147,11 +135,8 @@ const CloseButton = styled.TouchableOpacity`
 `;
 
 const QuestionContainer = styled.ScrollView`
-  overflow: visible;
   flex: 1;
   height: 20px;
-  /* padding-left: 5px;
-  padding-right: 5px; */
   padding-top: 5px;
   padding-bottom: 5px;
 `;

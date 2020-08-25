@@ -123,10 +123,8 @@ const Container = styled.KeyboardAvoidingView`
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  shadow-opacity: 0.5;
-  shadow-radius: 5px;
-  shadow-color: grey;
-  shadow-offset: 0px 0px;
+  border-color: #1063a9;
+  border-width: 1px;
   margin-bottom: 20px;
 `;
 
