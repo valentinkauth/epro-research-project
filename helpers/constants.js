@@ -9,6 +9,7 @@ export const RESOURCES_QUESTIONNAIRE_RESPONSE_QUESTIONS_ANALYZE = [
   "eortc-qlq-c30-q6",
 ];
 
-export const SERVER_BASE_URL = "http://localhost:9442/fhir-server/api/v4";
+export const IP_ADRESS = "192.168.178.20"
+export const SERVER_BASE_URL = "http://"+IP_ADRESS+":9442/fhir-server/api/v4";
 export const SERVER_USERNAME = "fhiruser";
 export const SERVER_PASSWORD = "new-password";

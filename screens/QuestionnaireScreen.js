@@ -39,7 +39,11 @@ export default class QuestionnaireScreen extends React.Component {
   render() {
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
-        <Container>
+        <Container
+          behavior={Platform.OS == "ios" ? "padding" : "height"}
+          enabled
+          keyboardVerticalOffset={20}
+        >
           <CloseButtonContainer>
             <CloseButton onPress={() => this.props.navigation.goBack()}>
               <AntDesign name="close" size={28} color="black" />
@@ -74,14 +78,11 @@ export default class QuestionnaireScreen extends React.Component {
 
   // Add answer to answer object of state
   addAnswer = (linkId, value) => {
-    console.log("Received new answer of question " + linkId + ":" + value);
+    // console.log("Received new answer of question " + linkId + ":" + value);
     // Get current answer object
     var updatedAnswers = this.state.answers;
     // Add new answer
     updatedAnswers[linkId] = value;
-
-    // Update state
-    this.setState({ answers: updatedAnswers });
 
     // Check if all questions are answered (exclude questions that are not required)
     var everythingAnswered = true;
@@ -91,7 +92,11 @@ export default class QuestionnaireScreen extends React.Component {
         break;
       }
     }
-    this.setState({ allQuestionsAnswered: everythingAnswered });
+    // Update state
+    this.setState({
+      allQuestionsAnswered: everythingAnswered,
+      answers: updatedAnswers,
+    });
   };
 
   sendAnswers = async () => {
@@ -158,4 +163,5 @@ const ButtonContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+  margin-bottom: 10px
 `;

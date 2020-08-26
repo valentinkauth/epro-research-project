@@ -45,16 +45,25 @@ const QuestionCard = (props) => {
       break;
     case "boolean":
       questionCardContent = (
-        <Switch
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={(value) => {
-            console.log(value);
-            toggleSwitch();
+        <RadioForm
+          radio_props={[{label: "Ja", value: true}, {label: "Nein", value: false}]}
+          initial={-1}
+          // formHorizontal={true}
+          // labelHorizontal={true}
+          onPress={(value) => {
             props.callBack(props.linkId, getValueBoolean(value));
           }}
-          value={isEnabled}
         />
+        // <Switch
+        //   trackColor={{ false: "#767577", true: "#81b0ff" }}
+        //   ios_backgroundColor="#3e3e3e"
+        //   onValueChange={(value) => {
+        //     console.log(value);
+        //     toggleSwitch();
+        //     props.callBack(props.linkId, getValueBoolean(value));
+        //   }}
+        //   value={isEnabled}
+        // />
       );
       break;
     case "string":

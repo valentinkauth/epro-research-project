@@ -93,7 +93,7 @@ class ProfileScreen extends React.Component {
                 <LabelContainer>
                   {this.state.visualizationData.legend.map((value, index) => {
                     return (
-                      <InnerLabelContainer>
+                      <InnerLabelContainer key={index}>
                         <Label
                           labelColor={
                             this.state.visualizationData.datasets[index].color
