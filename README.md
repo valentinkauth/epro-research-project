@@ -51,5 +51,6 @@ expo start
 
 ## Bekannte Probleme
 - App kann Abstürzen wenn Fragebogen zu schnell bearbeitet wird insbesondere bei Tastatureingabe (scheint ein Problem mit den Callbacks in Kombination mit der setState Methode zu sein)
+- Die Skala der X-Achse des LineGraph zeigt zweimal den Wert Mäßig an, da react-native-chart-kit selbstständig die Skalierung der Achsenbeschriftung festlegt und somit manche Labels mehrfach vorkommen können.
 - Fehlerhafte Serveranfragen werden nicht vom System kommuniziert (lediglich über Log-Nachrichten in der Konsole)
 - Da der Android Simulator nicht mit Localhost umgehen kann, muss zunächst die IP-Adresse des lokalen Rechners in constants.js eingetragen werden. 
